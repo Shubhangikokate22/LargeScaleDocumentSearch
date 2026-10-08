@@ -1,0 +1,5 @@
+[
+  {"id": 1, "title": "Machine learning basics", "text": "Machine learning studies algorithms that learn from data."},
+  {"id": 2, "title": "Parallel computing", "text": "OpenMP supports parallel computing with shared memory threads."},
+  {"id": 3, "title": "Learning and search", "text": "Document search can use machine learning to rank useful results."}
+]

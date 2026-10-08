@@ -1,0 +1,33 @@
+# Build output
+/build/
+/cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+# Python environments and generated files
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Local environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Generated chart (benchmark result JSON files are tracked examples)
+/results/benchmark_graphs.html
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+Desktop.ini

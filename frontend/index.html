@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Large-Scale Document Search</title>
+  <link rel="stylesheet" href="css/style.css"><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<header class="top"><div class="brand"><span class="mark">DS</span><div><h1>LARGE-SCALE DOCUMENT SEARCH</h1><p>Sequential vs OpenMP Parallel Search</p></div></div><span class="status"><i></i> Research dashboard</span></header>
+<nav class="tabs"><button class="active" data-page="search">Search</button><button data-page="performance">Performance</button><button data-page="dataset">Dataset</button><button data-page="correctness">Correctness</button></nav>
+<main>
+  <section id="search" class="page active">
+    <div class="intro"><span class="eyebrow">DOCUMENT RETRIEVAL LAB</span><h2>Find signal in your collection.</h2><p>Compare a straightforward sequential scan with a parallel OpenMP search.</p></div>
+    <div class="panel controls">
+      <label>Search query<input id="query" placeholder="Enter your search query..."></label>
+      <label>Mode<select id="mode"><option value="sequential">Sequential</option><option value="openmp">OpenMP parallel</option></select></label>
+      <label id="threadsLabel">Threads <span class="subtle">(OpenMP only)</span><input id="threads" type="number" value="4" min="1" max="1024" step="1" inputmode="numeric"></label>
+      <label class="dataset-input">Dataset JSON path<input id="datasetPath" value="C:\Users\shubh\Downloads\News_Category_Dataset_v3.json"></label>
+      <button class="primary" id="searchBtn">Search documents <span>→</span></button>
+    </div>
+    <div id="searchError" class="error"></div>
+    <div class="metric-row"><div class="metric"><small>Matching documents</small><strong id="totalResults">—</strong></div><div class="metric"><small>Execution time</small><strong id="searchTime">—</strong></div><div class="metric"><small>Search mode</small><strong id="searchMode">—</strong></div></div>
+    <div class="section-title"><div><span class="eyebrow">RANKED BY RELEVANCE</span><h3>Top search results</h3><p id="resultSummary" class="subtle">Run a search to see the highest scoring matches.</p></div></div>
+    <div id="searchResults" class="results empty">Run a search to see matching documents.</div>
+  </section>
+  <section id="performance" class="page">
+    <div class="intro"><span class="eyebrow">PERFORMANCE EVALUATION</span><h2>Measure the parallel gain.</h2><p>Run actual search workloads and compare elapsed time, speedup and efficiency.</p></div>
+    <div class="panel runbar"><label>Benchmark query<input id="benchQuery" value="machine learning"></label><button class="primary" id="benchBtn">Run benchmark <span>→</span></button><div id="benchError" class="error"></div></div>
+    <div class="panel dataset-note"><strong>Benchmark dataset</strong><span id="benchDatasetInfo">No benchmark data available.</span></div>
+    <div class="metric-row four"><div class="metric"><small>Sequential time</small><strong id="seqTime">—</strong></div><div class="metric"><small>Parallel time</small><strong id="parTime">—</strong></div><div class="metric"><small>Speedup</small><strong id="speedup">—</strong></div><div class="metric"><small>Efficiency</small><strong id="efficiency">—</strong></div></div>
+    <div class="charts"><article class="panel"><h3>Execution time vs threads</h3><canvas id="timeChart"></canvas></article><article class="panel"><h3>Speedup vs threads</h3><canvas id="speedChart"></canvas></article><article class="panel"><h3>Parallel efficiency vs threads</h3><canvas id="effChart"></canvas></article><article class="panel"><h3>Execution time vs dataset size</h3><canvas id="sizeChart"></canvas></article></div>
+    <div class="panel table-wrap"><h3>Benchmark records</h3><table><thead><tr><th>Dataset size</th><th>Threads</th><th>Sequential</th><th>Parallel</th><th>Speedup</th><th>Efficiency</th><th>Correct</th></tr></thead><tbody id="benchRows"><tr><td colspan="7" class="empty">No benchmark data available.</td></tr></tbody></table></div>
+    <div class="panel"><h3>Measured performance notes</h3><p id="analysis">Run a benchmark to generate observations from measured timings.</p></div>
+  </section>
+  <section id="dataset" class="page">
+    <div class="intro"><span class="eyebrow">DATASET PROFILE</span><h2>Know what you are searching.</h2><p>Metadata and a small preview are read directly from the selected JSON file.</p></div>
+    <div class="metric-row four"><div class="metric"><small>Filename</small><strong id="dsFilename">—</strong></div><div class="metric"><small>Documents</small><strong id="dsCount">—</strong></div><div class="metric"><small>Total words</small><strong id="dsWords">—</strong></div><div class="metric"><small>Avg. length</small><strong id="dsAverage">—</strong></div></div>
+    <div class="panel"><div class="section-title"><div><span class="eyebrow">SAMPLE</span><h3>Document preview</h3></div><span class="loaded" id="loadedStatus">Not loaded</span></div><p class="subtle" id="dsSize">Dataset size · —</p><div id="preview" class="results empty">Choose a dataset path and load its profile.</div><button class="secondary" id="refreshDataset">Load dataset profile</button></div>
+  </section>
+  <section id="correctness" class="page">
+    <div class="intro"><span class="eyebrow">CORRECTNESS VERIFICATION</span><h2>Parallel output should agree.</h2><p>Same query, same deterministic ranking, two implementations.</p></div>
+    <div class="panel runbar"><label>Verification query<input id="correctQuery" value="machine learning"></label><button class="primary" id="correctBtn">Verify results <span>→</span></button><div id="correctError" class="error"></div></div>
+    <div id="correctStatus" class="verify neutral">Run a correctness check to compare results.</div>
+    <div class="metric-row"><div class="metric"><small>Sequential results</small><strong id="seqCount">—</strong></div><div class="metric"><small>OpenMP results</small><strong id="ompCount">—</strong></div><div class="metric"><small>Matching results</small><strong id="matchCount">—</strong></div></div>
+    <div class="panel table-wrap"><h3>Ranked output comparison</h3><table><thead><tr><th>Rank</th><th>Document ID</th><th>Title</th><th>Sequential score</th><th>OpenMP score</th><th>Match</th></tr></thead><tbody id="correctRows"><tr><td colspan="6" class="empty">No correctness run yet.</td></tr></tbody></table></div>
+  </section>
+</main>
+<footer>Parallel Computing Assignment <span>•</span> C++17 + OpenMP <span>•</span> Flask API</footer>
+<script src="js/charts.js"></script><script src="js/app.js"></script>
+</body></html>
